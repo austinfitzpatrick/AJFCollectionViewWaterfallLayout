@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "AJFCollectionViewWaterfallLayout"
-  s.version          = "0.1.1"
+  s.version          = "0.2.0"
   s.summary          = "UICollectionViewLayout subclass that accomodates sections with different numbers of columns."
   s.description      = <<-DESC
                        A UICollectionViewLayout subclass that allows you to specify a different number of columns for each section.  Cells will be tiled in a waterfall (Pinterest-style) layout with new cells always appearing in the shortest column.
