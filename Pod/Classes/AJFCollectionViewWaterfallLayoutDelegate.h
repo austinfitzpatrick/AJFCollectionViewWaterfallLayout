@@ -15,8 +15,8 @@
 
 @optional
 
-- (NSInteger) collectionView:(UICollectionView*) collectionView columnSpacingForSection:(NSInteger) section;
-- (CGFloat) collectionView:(UICollectionView*) collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section;
+- (NSInteger) collectionView:(UICollectionView*) collectionView layout:(UICollectionViewLayout*) collectionViewLayout columnSpacingForSection:(NSInteger) section;
+- (NSInteger) collectionView:(UICollectionView*) collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section;
 - (UIEdgeInsets) collectionView:(UICollectionView*) collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section;
 
 @end

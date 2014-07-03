@@ -21,6 +21,11 @@
     [super viewDidLoad];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     ((AJFCollectionViewWaterfallLayout*)self.collectionView.collectionViewLayout).stretchingType = AJFCollectionViewWaterfallStretchAllCells;
+    
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:[[AJFCollectionViewWaterfallLayout alloc] init]];
+    self.collectionView.delegate = self;    //make sure to set a delegate and datasource
+    self.collectionView.dataSource = self;
+    
 }
 
 #pragma mark UICollectionViewDatasource
