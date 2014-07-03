@@ -118,7 +118,7 @@ const NSInteger AJFUnionCount = 20;
         for (NSInteger i = 0; i < numberOfColumns; i++) [itemAttributesByColumn addObject:[NSMutableArray array]];
         
         CGFloat minimumInteritemSpacing = [self minimumInteritemSpacingForSection:section];
-        CGFloat minimumColumnSpacing = AJFDefaultWaterfallLayoutColumnSpacing;
+        CGFloat minimumColumnSpacing = [self columnSpacingForSection:section];
         UIEdgeInsets sectionInset = [self sectionInsetsForSection:section];
         [self.itemAttributesBySectionNumber addObject:[NSMutableArray array]];
         
@@ -244,6 +244,13 @@ const NSInteger AJFUnionCount = 20;
         }
     }
     return shortestIndex;
+}
+
+- (NSInteger) columnSpacingForSection:(NSInteger) section{
+    if ([self.delegate respondsToSelector:@selector(collectionView:layout:columnSpacingForSection:)]){
+        return [self.delegate collectionView:self.collectionView layout:self columnSpacingForSection:section];
+    }
+    return AJFDefaultWaterfallLayoutColumnSpacing;
 }
 
 - (CGFloat) minimumInteritemSpacingForSection:(NSInteger) section{
