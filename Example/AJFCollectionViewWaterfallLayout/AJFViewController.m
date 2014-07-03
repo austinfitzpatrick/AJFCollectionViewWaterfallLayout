@@ -7,6 +7,7 @@
 //
 
 #import "AJFViewController.h"
+#import "AJFCollectionViewWaterfallLayout.h"
 #define ARC4RANDOM_MAX      0x100000000
 
 @interface AJFViewController ()
@@ -19,6 +20,7 @@
 {
     [super viewDidLoad];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    ((AJFCollectionViewWaterfallLayout*)self.collectionView.collectionViewLayout).stretchingType = AJFCollectionViewWaterfallStretchAllCells;
 }
 
 #pragma mark UICollectionViewDatasource

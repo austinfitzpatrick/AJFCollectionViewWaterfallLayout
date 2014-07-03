@@ -31,8 +31,6 @@ const NSInteger AJFUnionCount = 20;
 
 @implementation AJFCollectionViewWaterfallLayout
 
-
-
 - (CGSize) collectionViewContentSize{
     CGFloat maximumY = 0;
     for (NSInteger i = 0; i < [self.maximumColumnHeightsBySectionNumber count]; i++){
@@ -114,7 +112,11 @@ const NSInteger AJFUnionCount = 20;
     CGFloat previousColumnHeight = 0;
     for (NSInteger section = 0; section < numberOfSections; section++){
         NSInteger numberOfColumns = [self.delegate collectionView:self.collectionView numberOfColumnsInSection:section];
+        NSMutableArray *itemAttributesByColumn = [NSMutableArray arrayWithCapacity:numberOfColumns];
         NSAssert(numberOfColumns > 0, @"The number of columns must be greater than 0");
+        
+        for (NSInteger i = 0; i < numberOfColumns; i++) [itemAttributesByColumn addObject:[NSMutableArray array]];
+        
         CGFloat minimumInteritemSpacing = [self minimumInteritemSpacingForSection:section];
         CGFloat minimumColumnSpacing = AJFDefaultWaterfallLayoutColumnSpacing;
         UIEdgeInsets sectionInset = [self sectionInsetsForSection:section];
@@ -150,11 +152,36 @@ const NSInteger AJFUnionCount = 20;
             [itemAttributes addObject:attributes];
             [self.allItemAttributes addObject:attributes];
             self.columnHeightsBySectionNumber[section][columnNumber] = @(CGRectGetMaxY(attributes.frame) + minimumInteritemSpacing - previousColumnHeight);
+            [itemAttributesByColumn[columnNumber] addObject:attributes];
         }
         [self.itemAttributesBySectionNumber[section] addObject:itemAttributes];
         CGFloat maximumColumnHeight = [self maximumColumnHeightForSection:section];
         previousColumnHeight += maximumColumnHeight;
         [self.maximumColumnHeightsBySectionNumber insertObject:@(maximumColumnHeight) atIndex:section];
+
+        if (self.stretchingType == AJFCollectionViewWaterfallStretchLastCell ||
+            self.stretchingType == AJFCollectionViewWaterfallStretchAllCells){
+            for (NSInteger columnNumber = 0; columnNumber < numberOfColumns; columnNumber++){
+                CGFloat difference = maximumColumnHeight - [self.columnHeightsBySectionNumber[section][columnNumber] floatValue];
+                
+                if (self.stretchingType == AJFCollectionViewWaterfallStretchAllCells){
+                    CGFloat movedSoFar = 0;
+                    for (UICollectionViewLayoutAttributes *attributes in itemAttributesByColumn[columnNumber]){
+                        CGFloat individualDifference = floorf(difference / [itemAttributesByColumn[columnNumber] count]);
+                        CGRect oldFrame = attributes.frame;
+                        CGRect newFrame = CGRectMake(CGRectGetMinX(oldFrame), movedSoFar + CGRectGetMinY(oldFrame), CGRectGetWidth(oldFrame), floorf(CGRectGetHeight(oldFrame) + individualDifference));
+                        movedSoFar += individualDifference;
+                        attributes.frame = newFrame;
+                    }
+                } else {
+                    UICollectionViewLayoutAttributes *attributes = [itemAttributesByColumn[columnNumber] lastObject];
+                    CGRect oldFrame = attributes.frame;
+                    CGRect newFrame = CGRectMake(CGRectGetMinX(oldFrame), CGRectGetMinY(oldFrame), CGRectGetWidth(oldFrame), floorf(CGRectGetHeight(oldFrame) + difference));
+                    attributes.frame = newFrame;
+                }
+                
+            }
+        }
     }
     
     NSInteger idx = 0;

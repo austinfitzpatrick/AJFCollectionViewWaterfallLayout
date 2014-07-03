@@ -13,8 +13,15 @@
 #import <UIKit/UIKit.h>
 #import "AJFCollectionViewWaterfallLayoutDelegate.h"
 
+typedef NS_ENUM(NSInteger, AJFCollectionViewWaterfallCellStretchingType){
+    AJFCollectionViewWaterfallNoStretching = 0,
+    AJFCollectionViewWaterfallStretchLastCell,
+    AJFCollectionViewWaterfallStretchAllCells
+};
+
 @interface AJFCollectionViewWaterfallLayout : UICollectionViewLayout
 
 @property (nonatomic, weak, readonly) id<AJFCollectionViewWaterfallLayoutDelegate> delegate;
+@property (nonatomic) AJFCollectionViewWaterfallCellStretchingType stretchingType;
 
 @end
