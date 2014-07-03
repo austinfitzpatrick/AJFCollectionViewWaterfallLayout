@@ -1,0 +1,14 @@
+PODS:
+  - AJFCollectionViewWaterfallLayout (0.1.0)
+
+DEPENDENCIES:
+  - AJFCollectionViewWaterfallLayout (from `../`)
+
+EXTERNAL SOURCES:
+  AJFCollectionViewWaterfallLayout:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AJFCollectionViewWaterfallLayout: 24905f8b1a6502bc1e786fb430dbc5477f1046da
+
+COCOAPODS: 0.33.1
