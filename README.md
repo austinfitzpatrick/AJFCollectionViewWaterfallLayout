@@ -20,7 +20,7 @@ it, simply add the following line to your Podfile:
 
 ## Author
 
-Austin Fitzpatrick, austin@moonfrye.com
+Austin Fitzpatrick, fitzpatrick.austin@gmail.com
 
 ## License
 
