@@ -109,7 +109,7 @@ AJFCollectionViewWaterfallLayout requires iOS 6.0 or greater and ARC.
 AJFCollectionViewWaterfallLayout is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
-    pod "AJFCollectionViewWaterfallLayout"
+    pod 'AJFCollectionViewWaterfallLayout', :git => 'https://github.com/austinfitzpatrick/AJFCollectionViewWaterfallLayout.git'
 
 ## Author
 
