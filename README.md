@@ -2,7 +2,7 @@
 
 ##Purpose
 
-The default UICollectionViewLayout subclass, UICollectionViewFlowLayout, does a pretty good job of supporting a grid baesd layout but fails
+The default UICollectionViewLayout subclass, UICollectionViewFlowLayout, does a pretty good job of supporting a grid based layout but fails
 when the items in the same row have differing heights, leaving blank spaces under cells even when another cell could fit underneath.
 
 This type of layout, with a set number of fixed-width columns and variable height cells is called a Waterfall Layout.
