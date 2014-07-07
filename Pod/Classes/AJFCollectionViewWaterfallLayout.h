@@ -24,4 +24,6 @@ typedef NS_ENUM(NSInteger, AJFCollectionViewWaterfallCellStretchingType){
 @property (nonatomic, weak, readonly) id<AJFCollectionViewWaterfallLayoutDelegate> delegate;
 @property (nonatomic) AJFCollectionViewWaterfallCellStretchingType stretchingType;
 
+- (CGFloat) columnWidthForSection:(NSInteger) section;
+
 @end

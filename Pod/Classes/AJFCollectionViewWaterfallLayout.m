@@ -96,7 +96,6 @@ const NSInteger AJFUnionCount = 20;
     return nil;
 }
 
-
 - (void) prepareLayout{
     [super prepareLayout];
     
@@ -154,7 +153,7 @@ const NSInteger AJFUnionCount = 20;
             self.columnHeightsBySectionNumber[section][columnNumber] = @(CGRectGetMaxY(attributes.frame) + minimumInteritemSpacing - previousColumnHeight);
             [itemAttributesByColumn[columnNumber] addObject:attributes];
         }
-        [self.itemAttributesBySectionNumber[section] addObject:itemAttributes];
+        [self.itemAttributesBySectionNumber[section] addObjectsFromArray:itemAttributes];
         CGFloat maximumColumnHeight = [self maximumColumnHeightForSection:section];
         previousColumnHeight += maximumColumnHeight;
         [self.maximumColumnHeightsBySectionNumber insertObject:@(maximumColumnHeight) atIndex:section];
@@ -193,6 +192,15 @@ const NSInteger AJFUnionCount = 20;
         [self.unionRects addObject:[NSValue valueWithCGRect:CGRectUnion(rect1, rect2)]];
         idx++;
     }
+
+}
+
+- (CGFloat) columnWidthForSection:(NSInteger) section{
+    NSInteger numberOfColumns = [self.delegate collectionView:self.collectionView numberOfColumnsInSection:section];
+    UIEdgeInsets sectionInset = [self sectionInsetsForSection:section];
+    CGFloat sectionWidth = CGRectGetWidth(self.collectionView.frame) - sectionInset.left - sectionInset.right;
+    CGFloat minimumColumnSpacing = [self columnSpacingForSection:section];
+    return floorf((sectionWidth - (numberOfColumns - 1) * minimumColumnSpacing) / numberOfColumns);
 }
 
 #pragma mark - Initializers and Private Methods
