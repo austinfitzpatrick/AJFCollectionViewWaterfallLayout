@@ -196,9 +196,13 @@ const NSInteger AJFUnionCount = 20;
 }
 
 - (CGFloat) columnWidthForSection:(NSInteger) section{
+    return [self columnWidthForSection:section withCollectionViewWidth:CGRectGetWidth(self.collectionView.frame)];
+}
+
+- (CGFloat) columnWidthForSection:(NSInteger)section withCollectionViewWidth:(CGFloat) collectionViewWidth{
     NSInteger numberOfColumns = [self.delegate collectionView:self.collectionView numberOfColumnsInSection:section];
     UIEdgeInsets sectionInset = [self sectionInsetsForSection:section];
-    CGFloat sectionWidth = CGRectGetWidth(self.collectionView.frame) - sectionInset.left - sectionInset.right;
+    CGFloat sectionWidth = collectionViewWidth - sectionInset.left - sectionInset.right;
     CGFloat minimumColumnSpacing = [self columnSpacingForSection:section];
     return floorf((sectionWidth - (numberOfColumns - 1) * minimumColumnSpacing) / numberOfColumns);
 }
