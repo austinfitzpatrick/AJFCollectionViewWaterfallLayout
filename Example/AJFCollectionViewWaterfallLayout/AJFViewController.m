@@ -22,6 +22,7 @@
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     ((AJFCollectionViewWaterfallLayout*)self.collectionView.collectionViewLayout).stretchingType = AJFCollectionViewWaterfallStretchAllCells;
     
+    
 }
 
 #pragma mark UICollectionViewDatasource
